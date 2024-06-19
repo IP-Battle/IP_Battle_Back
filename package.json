@@ -1,0 +1,16 @@
+{
+  "name": "IP_Battle_Back",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "repository": "https://github.com/IP-Battle/IP_Battle_Back.git",
+  "author": "Ito Junpei <123927296+itojun-1230@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/ts-node server.ts"
+  },
+  "dependencies": {
+    "@types/node": "^20.14.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
