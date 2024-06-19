@@ -1,3 +1,6 @@
+# パッケージ
 node_modules
+
+.env
 
 public/test.html
