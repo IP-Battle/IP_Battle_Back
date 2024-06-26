@@ -16,5 +16,13 @@
     "socket.io": "^4.7.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "compilerOptions": {
+      "resolveJsonModule": true,
+      "target": "es2016",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true
   }
 }
