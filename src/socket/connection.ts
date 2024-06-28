@@ -9,5 +9,6 @@ export const connection = (io: socket.Server, socketId: string, players: players
     score: 0,
     questionIds: []
   });
-  io.emit("foo", socketId);
+  console.log(`${socketId}が接続しました`);
+  io.emit("joinPlayer", socketId);
 }

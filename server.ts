@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 import path from 'path';
 //
 import config from "./src/config";
-import { connection } from './src/socket/connectio';
+import { connection } from './src/socket/connection';
 import { playersType } from './src/types/players';
 
 const port = config.port;
