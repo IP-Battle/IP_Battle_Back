@@ -6,13 +6,16 @@ import * as dotenv from "dotenv";
 import path from 'path';
 //
 import config from "./src/config";
+import { connection } from './src/socket/connection';
+import { playersType } from './src/types/players';
 
 const port = config.port;
-const host = config.host;
 const corsOrigin = config.corsOrigin;
 
 dotenv.config();
 const app = express();
+
+
 
 //静的ファイルの読み込み
 app.use(express.static(path.join(`${__dirname}/public/`)));
@@ -32,8 +35,6 @@ const io = new socket.Server(server, {
 //サーバー起動
 server.listen(port, () => {
   console.log(`Start the server at Port${port}`);
-
-  io.on('connection', (socket) => {
-    console.log('connected');
-  });
+  const players: playersType[] = [];
+  io.on('connection', (socket) => connection(io, socket.id, players));
 });
