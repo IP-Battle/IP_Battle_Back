@@ -3,4 +3,5 @@ export type playersType = {
   name: string,
   room: number,
   score: number,
+  questionIds: number[]
 }

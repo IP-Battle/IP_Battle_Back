@@ -7,6 +7,7 @@ export const connection = (io: socket.Server, socketId: string, players: players
     name: `名無し${players.length + 1}`,
     room: -1,
     score: 0,
+    questionIds: []
   });
   io.emit("foo", socketId);
 }
