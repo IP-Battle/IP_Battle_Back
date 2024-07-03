@@ -8,6 +8,8 @@ import path from 'path';
 import config from "./src/config";
 import { connection } from './src/socket/connection';
 import { playersType } from './src/types/players';
+import { feachQuestion } from './src/socket/feachQuestion';
+import { initDatabase } from './src/db';
 
 const port = config.port;
 const corsOrigin = config.corsOrigin;
@@ -15,6 +17,7 @@ const corsOrigin = config.corsOrigin;
 dotenv.config();
 const app = express();
 
+initDatabase();
 
 
 //静的ファイルの読み込み
@@ -36,5 +39,9 @@ const io = new socket.Server(server, {
 server.listen(port, () => {
   console.log(`Start the server at Port${port}`);
   const players: playersType[] = [];
-  io.on('connection', (socket) => connection(io, socket.id, players));
+  io.on('connection', (socket) => {
+    connection(io, socket.id, players)
+    
+    socket.on('feachQuestion', (arg) => feachQuestion(io, socket.id, arg));
+  });
 });
