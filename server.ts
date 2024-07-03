@@ -7,9 +7,12 @@ import path from 'path';
 //
 import config from "./src/config";
 import { connection } from './src/socket/connection';
-import { playersType } from './src/types/players';
 import { feachQuestion } from './src/socket/feachQuestion';
 import { initDatabase } from './src/db';
+
+import { playersType } from './src/types/players';
+import { roomType } from './src/types/room';
+import { matching } from './src/socket/matching';
 
 const port = config.port;
 const corsOrigin = config.corsOrigin;
@@ -38,10 +41,15 @@ const io = new socket.Server(server, {
 //サーバー起動
 server.listen(port, () => {
   console.log(`Start the server at Port${port}`);
-  const players: playersType[] = [];
+  
+  let players: playersType[] = [];
+  let waitPlayer: string[] = [];
+  let room: roomType = {};
   io.on('connection', (socket) => {
     connection(io, socket.id, players)
     
     socket.on('feachQuestion', (arg) => feachQuestion(io, socket.id, arg));
+    socket.on('matching', () => matching(io, socket.id, waitPlayer, room));
+    
   });
 });
