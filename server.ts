@@ -13,6 +13,7 @@ import { initDatabase } from './src/db';
 import { playersType } from './src/types/players';
 import { roomType } from './src/types/room';
 import { matching } from './src/socket/matching';
+import { gameEnd } from './src/socket/gameEnd';
 
 const port = config.port;
 const corsOrigin = config.corsOrigin;
@@ -50,6 +51,6 @@ server.listen(port, () => {
     
     socket.on('feachQuestion', (arg) => feachQuestion(io, socket.id, arg));
     socket.on('matching', () => matching(io, socket.id, waitPlayer, room));
-    
+    socket.on('gameEnd', (arg) => gameEnd(io, socket.id, room, arg[0], arg[1] ));
   });
 });
