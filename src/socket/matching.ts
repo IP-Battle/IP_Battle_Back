@@ -8,7 +8,19 @@ export const matching = (io: socket.Server, socketId: string, waitPlayer: string
   waitPlayer.push(socketId);
   if (waitPlayer.length >= 2) {
     const roomId = Math.floor(Math.random() * 10000);
-    room[roomId] = [waitPlayer[0], waitPlayer[1]];
+    room.push({
+      roomId: roomId,
+      playerData: [
+        {
+          questionData: {},
+          finish: false
+        },
+        {
+          questionData: {},
+          finish: false
+        }
+      ]
+    });
     waitPlayer = [];
 
     feachQuestion(io, room[roomId][0], []);

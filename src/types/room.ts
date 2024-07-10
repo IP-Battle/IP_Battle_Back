@@ -1,3 +1,9 @@
 export type roomType = {
-  [roomId: number]: string[]
-}
+  roomId: number,
+  playerData: {
+    questionData: {
+      [questionId: number]: boolean,
+    }
+    finish: boolean
+  }[]
+}[]
