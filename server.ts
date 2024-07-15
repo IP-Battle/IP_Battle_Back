@@ -21,8 +21,7 @@ const corsOrigin = config.corsOrigin;
 dotenv.config();
 const app = express();
 
-initDatabase();
-
+//initDatabase();
 
 //静的ファイルの読み込み
 app.use(express.static(path.join(`${__dirname}/public/`)));
@@ -44,13 +43,15 @@ server.listen(port, () => {
   console.log(`Start the server at Port${port}`);
   
   let players: playersType[] = [];
-  let waitPlayer: string[] = [];
+  let waitPlayer: Set<string> = new Set();
   let room: roomType = {};
   io.on('connection', (socket) => {
     connection(io, socket.id, players)
     
     socket.on('feachQuestion', (arg) => feachQuestion(io, socket.id, arg));
     socket.on('matching', () => matching(io, socket.id, waitPlayer, room));
-    socket.on('gameEnd', (arg) => gameEnd(io, socket.id, room, arg[0], arg[1] ));
+    socket.on('gameEnd', (roomId: number, questionData: {[questionId: number]: boolean}) => {
+      gameEnd(io, socket.id, room,roomId, questionData )}
+    );
   });
 });

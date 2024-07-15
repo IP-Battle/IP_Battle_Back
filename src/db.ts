@@ -3,6 +3,7 @@ import sqlite3 from "sqlite3";
 const db = new sqlite3.Database("./database.db");
 
 export const initDatabase = () => {
+  
   db.serialize(() => {
     /*
     questionテーブルの作成

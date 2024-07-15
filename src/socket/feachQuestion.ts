@@ -6,6 +6,7 @@ const db = new sqlite3.Database("./database.db");
 
 
 export const feachQuestion = (io: socket.Server, socketId: string, answeredQuestions: number[]) => {
+
   db.serialize(() => {
     db.get("select * from question where id not in (?) order by random() limit 1", String(answeredQuestions), (err, row: questionType) => {
       if (err) {
